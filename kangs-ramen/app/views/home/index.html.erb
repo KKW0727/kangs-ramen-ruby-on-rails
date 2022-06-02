@@ -22,17 +22,56 @@
     <h1 class="concept_img"><%= image_tag "concept_img.png" %></h1>
 </section>
 
+<section class="menu">
+    <article class="karai_ramen">
+        <%= image_tag "ramen1.png" %>
+        <h3 class="title">辛いラーメン</h3>
+        <span class="price">700円</span>
+        <p class="description">鳥出汁に唐辛子をベースに30数種類の材料を調合し何昼夜も寝かせ熟成させたソースを混ぜます。 
+        そうすることで単なる辛さだけではなく様々な旨味が口の中に広がり、より一層ラーメンが奥深い味になります。</p>
+    </article>
+     <article class="shoyu_ramen">
+        <%= image_tag "ramen2.png" %>
+        <h3 class="title">醤油ラーメン</h3>
+        <span class="price">700円</span>
+        <p class="description">鶏肉と野菜を基本とする出汁に魚や牛肉などを入れて味をつけます。 
+        醤油ソースを入れて味を増すので、すっきりとした黒味のスープが特徴です。 醤油ラーメンには、縮れたラーメンを使い、竹の子を漬けて作ったメンマやワケギ、蒲鉾、海苔、調味卵（味玉）、もやしを供えます。 
+        チャーシューの代わりに牛肉を薄く切ったり、辛い唐辛子や中国風のスパイスを入れます。</p>
+    </article>
+     <article class="miso_ramen">
+        <%= image_tag "ramen3.png" %>
+        <h3 class="title">味噌ラーメン</h3>
+        <span class="price">700円</span>
+        <p class="description">野菜や肉を中華鍋で炒めたときにダシとタレ（味噌）を入れてスープを作ります。 
+        醤油ラーメンの場合、ダシとタレを1杯ずつ器で混ぜて作りますが味噌ラーメンは中華鍋で調理しながらスープを作ることが特徴です。</p>
+    </article>
+     <article class="tonkotsu_ramen">
+        <%= image_tag "ramen4.png" %>
+        <h3 class="title">豚骨ラーメン</h3>
+        <span class="price">700円</span>
+        <p class="description">豚骨ラーメンは、名前のとおり豚骨を使用したスープが特徴です。 強火で炊くことで白く濁ったスープを作ることができます。 
+        豚骨の中に含まれているゼラチンが溶けることで、 鮮やかな色とうまみを感じることができるのです。</p>
+    </article>
+</section>
 </div>
 <style>
+
+    * {
+        margin: 0; padding: 0;
+    }
   
     ul,li {
        list-style: none;
-       padding: 0;
+    }
+
+    section {
+        margin-bottom: 70px;
     }
 
     .container {
-        max-width: 1000px;
-        padding: 20px 30px;
+        max-width: 1200px;
+        margin:0 auto;
+        padding: 50px 30px;
     }
 
     .menu_container {
@@ -53,7 +92,7 @@
     .main_menu, 
     .sub_menu{
         display: flex; 
-        margin: 20px 0 40px 0;  
+        margin: 30px 0 30px 0;  
     }
 
     .main_menu li, 
@@ -76,5 +115,29 @@
 
     .concept_img img {
         width: 600px;
+    }
+
+    .menu {
+        display: flex;     
+    }
+
+    .menu article {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 25%;   
+    }
+
+    .menu h3 {
+        margin: 4px 0 2px 0;
+    }
+
+    .menu span {
+        margin-bottom: 8px;
+    }
+
+    .menu img{
+        width: 200px;
+        border-radius: 50%;
     }
 </style>
