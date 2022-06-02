@@ -1,4 +1,6 @@
 <div class="container">
+
+<%# header %>
 <header>  
     <h1 class="logo"><%= image_tag "logo.png" %></h1>
 
@@ -18,11 +20,16 @@
     </section>
 </header>
 
+<%# concept %>
 <section class="concept">
+    <h1>コンセプト</h1>
     <h1 class="concept_img"><%= image_tag "concept_img.png" %></h1>
 </section>
 
+<%# menu %>
 <section class="menu">
+    <h1>メニュー</h1>
+    <div class="menu_box">
     <article class="karai_ramen">
         <%= image_tag "ramen1.png" %>
         <h3 class="title">辛いラーメン</h3>
@@ -52,9 +59,30 @@
         <p class="description">豚骨ラーメンは、名前のとおり豚骨を使用したスープが特徴です。 強火で炊くことで白く濁ったスープを作ることができます。 
         豚骨の中に含まれているゼラチンが溶けることで、 鮮やかな色とうまみを感じることができるのです。</p>
     </article>
+    </div>
 </section>
+
+<%# game info %>
+<section class="game_info">
+    <h1>試合情報</h1>
+    <div class="game_info_box">
+    <article class="my_team team">
+    <%= image_tag "hanshin.png" %>
+    <span class="my_team_score">5</span>
+    </article>
+     <article class="opponent_team team">
+     <span class="opponent_team_score">2</span>
+    <%= image_tag "kyojin.png" %>
+    </article>
+    </div>
+</section>
+
 </div>
 <style>
+
+    body {
+        background-image: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 60%,rgba(0,0,0,.8) 100%);
+    }
 
     * {
         margin: 0; padding: 0;
@@ -64,8 +92,13 @@
        list-style: none;
     }
 
+    h1 {
+        margin: 70px 0 20px 0; 
+        font-size: 30px;
+    }
+
     section {
-        margin-bottom: 70px;
+        text-align: center;
     }
 
     .container {
@@ -80,6 +113,7 @@
        align-items: center;
     }
 
+    /* header logo */
     .logo {
        margin: 0 auto;
        text-align: center;
@@ -89,6 +123,7 @@
         width: 450px;
     }
 
+    /* header main menu, sub menu */
     .main_menu, 
     .sub_menu{
         display: flex; 
@@ -107,7 +142,8 @@
     .sub_menu li:hover {
         text-decoration: underline;
     }
-
+    
+    /* concept */
     .concept_img {
         margin: 0 auto;
         text-align: center;
@@ -117,27 +153,51 @@
         width: 600px;
     }
 
+    /* menu (ramen) */
     .menu {
-        display: flex;     
+        display: flex;    
+        flex-direction: column; 
     }
 
-    .menu article {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .menu_box {
+        display: flex;        
+    }
+
+    .menu_box article {
         width: 25%;   
     }
 
-    .menu h3 {
+    .menu_box h3 {
         margin: 4px 0 2px 0;
     }
 
-    .menu span {
+    .menu_box span {
         margin-bottom: 8px;
     }
 
-    .menu img{
+    .menu_box img{
         width: 200px;
         border-radius: 50%;
     }
+
+    /* game info */
+
+    .game_info {
+        width: 500px;
+        margin: 0 auto;
+    }
+
+    .game_info_box{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .team {
+        width: 250px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 38px;
+    }
+    
 </style>
