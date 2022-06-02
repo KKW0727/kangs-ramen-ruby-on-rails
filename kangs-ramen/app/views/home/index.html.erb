@@ -6,11 +6,11 @@
 
     <section class = "menu_container">
     <ul class= "main_menu">
-        <li>コンセプト</li>
-        <li>メニュー</li>
-        <li>試合情報</li>
-        <li>アクセス</li>
-        <li>コンタクト</li>
+        <li data-link ="#concept">コンセプト</li>
+        <li data-link ="#menu">メニュー</li>
+        <li data-link ="#game_info">試合情報</li>
+        <li data-link ="#access">アクセス</li>
+        <li data-link ="#contact">コンタクト</li>
     </ul>
      <ul class= "sub_menu">
         <li>ログイン</li>
@@ -21,13 +21,13 @@
 </header>
 
 <%# concept %>
-<section class="concept">
+<section id="concept">
     <h1>コンセプト</h1>
     <h1 class="concept_img"><%= image_tag "concept_img.png" %></h1>
 </section>
 
 <%# menu %>
-<section class="menu">
+<section id="menu">
     <h1>メニュー</h1>
     <div class="menu_box">
     <article class="karai_ramen">
@@ -63,7 +63,7 @@
 </section>
 
 <%# game info %>
-<section class="game_info">
+<section id="game_info">
     <h1>試合情報</h1>
     <div class="game_info_box">
     <article class="my_team team">
@@ -78,7 +78,7 @@
 </section>
 
 <%# access %>
-<section class ="access">
+<section id ="access">
 <h1>アクセス</h1>
 <div class="access_box">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207541.7566105942!2d139.46656072431085!3d35.63167202677041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ca8749c6b39%3A0xf2802bee15a9a6e!2z5LiA6JitIOa4i-iwt-W6lw!5e0!3m2!1sja!2skr!4v1654148073598!5m2!1sja!2skr" width="350" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -91,7 +91,7 @@
 </section>
 
 <%# contact %>
-<section class="contact">
+<section id="contact">
 <h1>コンタクト</h1>
 <div class="contact_box">
  連絡先</br>
@@ -207,11 +207,12 @@
     /* game info */
 
     .game_info {
-        width: 500px;
         margin: 0 auto;
     }
 
     .game_info_box{
+        width: 500px;
+        margin: 0 auto;
         display: flex;
         justify-content: space-between;
     }
@@ -241,6 +242,20 @@
         font-size: 18px;
         line-height: 2;
     }
-    
+
 </style>
 
+<script>
+    document.addEventListener('click', (e) => {
+        let link = e.target.dataset.link;
+        if(link == null) {
+            return;
+        }
+        scrollIntoView(link);
+    });
+
+    function scrollIntoView(selector) {
+       const scrollTo =  document.querySelector(selector);
+       scrollTo.scrollIntoView( { behavior: 'smooth' } )
+    }
+</script>
