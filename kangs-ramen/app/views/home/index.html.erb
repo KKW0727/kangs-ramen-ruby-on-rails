@@ -1,0 +1,67 @@
+<div class="container">
+<header>  
+    <h1 class="logo"><%= image_tag "logo.png" %></h1>
+
+    <section class = "menu_container">
+    <ul class= "main_menu">
+        <li>コンセプト</li>
+        <li>メニュー</li>
+        <li>試合情報</li>
+        <li>アクセス</li>
+        <li>コンタクト</li>
+    </ul>
+     <ul class= "sub_menu">
+        <li>ログイン</li>
+        <li>会員登録</li>
+        <li>予約</li>
+    </ul>
+    </section>
+</header>
+</div>
+
+<style>
+  
+    ul,li {
+       list-style: none;
+       padding: 0;
+    }
+
+    .container {
+        max-width: 1000px;
+        padding: 20px 30px;
+    }
+
+    .menu_container {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+    }
+
+    .logo {
+       margin: 0 auto;
+       text-align: center;
+    }
+
+    .logo img {
+        width: 450px;
+    }
+
+    .main_menu, 
+    .sub_menu{
+        display: flex;   
+    }
+
+    .main_menu li, 
+    .sub_menu li {
+        padding: 8px 12px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .main_menu li:hover, 
+    .sub_menu li:hover {
+        text-decoration: underline;
+    }
+
+</style>
