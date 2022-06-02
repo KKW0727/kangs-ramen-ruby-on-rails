@@ -17,8 +17,12 @@
     </ul>
     </section>
 </header>
-</div>
 
+<section class="concept">
+    <h1 class="concept_img"><%= image_tag "concept_img.png" %></h1>
+</section>
+
+</div>
 <style>
   
     ul,li {
@@ -48,7 +52,8 @@
 
     .main_menu, 
     .sub_menu{
-        display: flex;   
+        display: flex; 
+        margin: 20px 0 40px 0;  
     }
 
     .main_menu li, 
@@ -64,4 +69,12 @@
         text-decoration: underline;
     }
 
+    .concept_img {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .concept_img img {
+        width: 600px;
+    }
 </style>
