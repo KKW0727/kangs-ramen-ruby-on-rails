@@ -56,12 +56,12 @@
     <h1>試合情報</h1>
     <div class="game_info_box">
     <article class="my_team team">
-    <%= image_tag "hanshin.png" %>
-    <span class="my_team_score">5</span>
+    <%= image_tag @game_info.my_team_logo %>
+    <span class="my_team_score"><%= @game_info.my_team_score %></span>
     </article>
      <article class="opponent_team team">
-     <span class="opponent_team_score">2</span>
-    <%= image_tag "kyojin.png" %>
+     <span class="opponent_team_score"><%= @game_info.opponent_team_score %></span>
+    <%= image_tag @game_info.opponent_team_logo %>
     </article>
     </div>
 </section>
