@@ -21,7 +21,15 @@
     <li><%= number_to_currency(reservation_menu.menu.price * reservation_menu.quantity) %></li>
     </ul>
 <% end %>
-<%= button_to "ホームへ", root_path, method: :get %>
+<div>
+<%= link_to "決済する", {}, class: "payment_btn" %>
+</div>
+<%= form_with url: payments_path do |f| %>
+    <%= hidden_field_tag 'reservation_id', @reservation.id %>
+    <%= hidden_field_tag 'stripeToken' %>
+    <%= hidden_field_tag 'stripeEmail' %>
+    <%= hidden_field_tag 'amount' %>
+<% end %>
 
 <style>
 
@@ -51,3 +59,34 @@
     }
 
 </style>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+            // #ボタンを押した際のcheckoutのフォームはStripeCheckout.configureで設定する
+            var handler = StripeCheckout.configure({
+                //StripeのAPIキーを引っ張ってくる
+                key: 'pk_test_51K7ZqTJZ9QJfM1QbCiK3uwVmngqko90QG5dxfr5H0K6pye9gxUbdMQiqudGFodMkliZLa77UKvSHMx4i4jdT1Kj000c1FeVr6F',
+                locale: 'auto', //言語の設定（autoの場合、ユーザのブラウザ規定言語が呼び出される）
+                currency: 'jpy',
+                // image: "image/directory", もしstripe checkoutのフォーム上部に画像を入れたい場合はここで指定する
+                panelLabel: "{{amount}}のお支払い", //checkoutボタンの表示文字、{{amount}}の中に金額が入る
+                allowRememberMe: false, //RememberMeを使いたい場合はここをtrueにする
+                token: function(token,arg) { //ここでstripeTokenとstripeEmailに値を入れてsubmitする
+                    document.querySelector('#stripeToken').value = token.id;
+                    document.querySelector('#stripeEmail').value = token.email;
+                    document.querySelector('#amount').value =  <%= @reservation.menu_total_price %>;
+                    document.querySelector('form').submit();
+                }
+            });
+
+         const payment_btn = document.querySelector('.payment_btn');
+         payment_btn.addEventListener('click', (e)=> {
+                e.preventDefault();
+                 handler.open({
+                    name: "Kang's Ramen",
+                    description: 'ラーメン',
+                    amount: <%= @reservation.menu_total_price %>
+            });
+            });
+
+</script>
