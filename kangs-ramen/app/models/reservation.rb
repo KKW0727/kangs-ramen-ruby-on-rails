@@ -1,8 +1,17 @@
 class Reservation < ApplicationRecord
   belongs_to :user
 
-  enum status: [:before_payment, :processed, :completed, :failed]
+  enum status: [:未決済, :決済中, :完了, :失敗]
 
   has_many :reservation_menus, dependent: :destroy
   has_many :menus, through: :reservation_menus
+
+  def menu_total_price 
+    menu_total_price = 0
+    self.reservation_menus.each do |reservation_menu|
+      menu_total_price += reservation_menu.menu.price * reservation_menu.quantity
+    end
+    return menu_total_price
+  end 
+  
 end
