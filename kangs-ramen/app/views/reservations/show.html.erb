@@ -22,7 +22,10 @@
     </ul>
 <% end %>
 <div>
+<%# 決済済みの予約は決済ボタンを隠す %>
+<% if @reservation.status != "完了" %>
 <%= link_to "決済する", {}, class: "payment_btn" %>
+<% end %>
 </div>
 <%= form_with url: payments_path do |f| %>
     <%= hidden_field_tag 'reservation_id', @reservation.id %>
