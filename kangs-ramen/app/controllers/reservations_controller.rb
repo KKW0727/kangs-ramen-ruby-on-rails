@@ -1,7 +1,11 @@
 class ReservationsController < ApplicationController
  
+  def index
+      @reservations = Reservation.where(user_id: current_user.id)
+  end
 
   def new
+     
     @reservation = Reservation.new
     @menus = Menu.where(is_publish: true)
   end
@@ -18,10 +22,10 @@ class ReservationsController < ApplicationController
       end
      end
         redirect_to reservation_path(reservation)
-  end
+    end
 
     def show
-      
+ 
     end
 
 
