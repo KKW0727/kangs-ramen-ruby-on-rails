@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
                 amount: charge[:amount]
             )
 
-            reservation.completed!
+            reservation.完了!
             notice = "決済を完了しました"   
 
         elsif charge[:status] = "failed"
