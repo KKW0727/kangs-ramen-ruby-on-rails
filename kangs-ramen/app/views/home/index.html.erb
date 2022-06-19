@@ -13,9 +13,9 @@
         <li data-link ="#contact">コンタクト</li>
     </ul>
      <ul class= "sub_menu">
-        <li><%= link_to "予約", new_user_registration_path %></li>
+        <li><%= link_to "予約", new_reservation_path %></li>
          <% if user_signed_in? %>
-        <li><%= link_to "予約確認", new_user_registration_path %></li>
+        <li><%= link_to "予約確認", reservations_path %></li>
         <li><%= link_to current_user.email, edit_user_registration_path %></li>
         <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "本当にログアウトしますか?"}  %></li>
        
@@ -39,7 +39,7 @@
     <h1>メニュー</h1>
     <div class="menu_box">
     <% @menus.each do |menu| %>
-    <article class="karai_ramen">
+    <article class="ramen">
         <% menu.image.each do |image| %>
         <%= image_tag image %>
         <% end %>
@@ -252,4 +252,9 @@
        const scrollTo =  document.querySelector(selector);
        scrollTo.scrollIntoView( { behavior: 'smooth' } )
     }
+
+    //予約、決済結果 alert
+    <% if flash[:notice].present? %>
+        alert("<%= flash[:notice] %>")
+    <% end %>
 </script>
