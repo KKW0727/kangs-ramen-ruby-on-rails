@@ -1,0 +1,85 @@
+<h1>予約確認</h1>
+<% @reservations.each do |reservation| %>
+<div class = "reservation_info">
+<div class = "reservation_info_menu_container">
+<% reservation.reservation_menus.each do |reservation_menu| %>
+<%# 予約メニュー　%>
+<ul class= "reservation_info_menu">
+   <% reservation_menu.menu.image.each do |image| %>
+   <li><%= image_tag image, size: 8*8 %></li>
+   <% end %>
+   <li><%= reservation_menu.menu.title %></li>
+   <li>価格:<%= number_to_currency(reservation_menu.menu.price) %></li>
+   <li>数量: <%= reservation_menu.quantity %></li>
+</ul>
+<% end %>
+</div>
+<%# 予約メニュー　合計%>
+<div>
+    <p>合計: <%= number_to_currency(reservation.menu_total_price) %> </p>
+    <p>決済状況: <%= reservation.status %> </p>
+</div>
+<%# actions %>
+<ul class = "reservation_info_actions">
+    <li><%= link_to "詳細", reservation_path(reservation) %></li>
+    <li><%= link_to "変更", edit_reservation_path(reservation) %></li>
+    <li><%= link_to "キャンセル", reservation_path(reservation), method: :delete, data: { confirm: "本当にキャンセルしますか" } %></li>
+</ul>
+
+</div>
+<% end %>
+
+<style>
+    body {
+        width: 800px;
+        margin: 50px auto 100px auto;
+    }
+
+    ul, li {
+        list-style: none;
+        margin: 0; padding: 0;
+    }
+
+    .reservation_info { 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #808080;
+        border-radius: 12px;
+        padding: 8px 12px;
+        margin: 12px 0;      
+    }
+
+    .reservation_info_menu_container {
+       display: flex;
+    }
+
+    .reservation_info_menu {
+        margin-right: 16px;
+    }
+
+    .reservation_info_menu img {
+        border-radius: 50%;
+    }
+
+    .reservation_info_actions li{
+       padding: 8px 12px;
+       background-color: #808080;
+       border-radius: 8px;
+       text-align: center;
+    }
+
+    .reservation_info_actions li:not(:last-child){
+        margin-bottom: 8px;
+    }
+
+    .reservation_info_actions li a{
+        text-decoration: none;
+        color: #000;
+    }
+
+    .reservation_info_actions li:hover{
+        opacity: 0.8;
+    }
+    
+</style>
