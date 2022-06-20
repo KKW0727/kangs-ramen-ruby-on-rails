@@ -64,6 +64,26 @@ ActiveAdmin.register Menu do
 
   end
 
+  batch_action :公開 do |ids|
+    @menus = Menu.where(id: ids)
+
+    @menus.each do |menu|
+      menu.update(is_publish: true)
+    end
+    flash[:notice] = "変更しました。"
+    redirect_to admin_menus_path
+  end
+
+  batch_action :非公開 do |ids|
+    @menus = Menu.where(id: ids)
+
+    @menus.each do |menu|
+      menu.update(is_publish: false)
+    end
+    flash[:notice] = "変更しました。"
+    redirect_to admin_menus_path
+  end
+  
   form html: {multipart: true} do |f|
 
     if f.object.image.attached?
