@@ -1,5 +1,9 @@
 ActiveAdmin.register Menu do
 
+  scope -> {'すべて'}, :all
+  scope -> {'公開'}, :published, default: true
+  scope -> {'非公開'}, :unpublished
+
   controller do
 
     def update(options={}, &block)
