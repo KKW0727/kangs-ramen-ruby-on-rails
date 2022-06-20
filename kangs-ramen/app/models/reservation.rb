@@ -3,6 +3,11 @@ class Reservation < ApplicationRecord
 
   enum status: [:未決済, :決済中, :完了, :失敗]
 
+  scope :before_payment, ->{Reservation.where(status:0)}
+  scope :processed, ->{Reservation.where(status:1)}
+  scope :completed, -> {Reservation.where(status: 2)}
+  scope :failed, ->{Reservation.where(status:3)}
+
   has_many :reservation_menus, dependent: :destroy
   has_many :menus, through: :reservation_menus
 
