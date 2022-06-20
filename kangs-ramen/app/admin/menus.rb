@@ -64,7 +64,7 @@ ActiveAdmin.register Menu do
 
   end
 
-  batch_action :公開 do |ids|
+  batch_action :publish do |ids|
     @menus = Menu.where(id: ids)
 
     @menus.each do |menu|
@@ -74,7 +74,7 @@ ActiveAdmin.register Menu do
     redirect_to admin_menus_path
   end
 
-  batch_action :非公開 do |ids|
+  batch_action :unpublish do |ids|
     @menus = Menu.where(id: ids)
 
     @menus.each do |menu|
