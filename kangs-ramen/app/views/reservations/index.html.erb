@@ -1,4 +1,7 @@
 <h1>予約確認</h1>
+<% if @reservations.blank? %>
+    <h2>予約されていません。</h2>
+<% end %>
 <% @reservations.each do |reservation| %>
 <div class = "reservation_info">
 <div class = "reservation_info_menu_container">
@@ -22,7 +25,6 @@
 <%# actions %>
 <ul class = "reservation_info_actions">
     <li><%= link_to "詳細", reservation_path(reservation) %></li>
-    <li><%= link_to "変更", edit_reservation_path(reservation) %></li>
     <li><%= link_to "キャンセル", reservation_path(reservation), method: :delete, data: { confirm: "本当にキャンセルしますか" } %></li>
 </ul>
 
