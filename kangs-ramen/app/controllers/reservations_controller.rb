@@ -28,6 +28,30 @@ class ReservationsController < ApplicationController
        @reservation = Reservation.find(params[:id])
     end
 
+    def destroy
+      reservation = Reservation.find(params[:id])
+
+      Stripe.api_key = "sk_test_51K7ZqTJZ9QJfM1Qbsp1OEHxk2zRr9rtMlFONRtzYWGywRyFESIptlPPWgYJKgj7HYLNYBo9K7TgwLOlevERpIt1J00JE56qjDn"
+       if reservation.payment.present?
+      refund = Stripe::Refund.create({
+            charge: reservation.payment.stripeToken
+      });
+
+       if refund[:status] == "succeeded"
+          #キャンセル成功の時、予約状況を変更
+          reservation.update(status: :キャンセル)
+          #キャンセルされた予約をstripeTokenで区別(nilの場合->キャンセルされた予約)
+          reservation.payment.update(stripeToken: nil)
+       end
+      
+      else
+       reservation.update(status: :キャンセル)
+      end
+        flash[:notice] = "予約と決済をキャンセルしました。"
+
+        redirect_to reservations_path
+    end
+
 
   private
   def permit_params
