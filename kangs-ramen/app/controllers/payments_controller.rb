@@ -28,6 +28,6 @@ class PaymentsController < ApplicationController
             notice = "決済を失敗しました。"
         end
             flash[:notice] = notice
-            redirect_to root_path   
+            redirect_to reservations_path   
     end
 end
