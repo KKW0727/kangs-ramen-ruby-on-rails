@@ -25,7 +25,7 @@
 <%# actions %>
 <ul class = "reservation_info_actions">
     <li><%= link_to "詳細", reservation_path(reservation) %></li>
-    <li><%= link_to "キャンセル", reservation_path(reservation), method: :delete, data: { confirm: "本当にキャンセルしますか" } %></li>
+    <li class= "cancel_btn" ><%= link_to "キャンセル", reservation_path(reservation), method: :delete , data: { confirm: "本当にキャンセルしますか"} %></li>
 </ul>
 
 </div>
@@ -65,6 +65,7 @@
     }
 
     .reservation_info_actions li{
+       width: 88px;
        padding: 8px 12px;
        background-color: #808080;
        border-radius: 8px;
@@ -85,3 +86,16 @@
     }
     
 </style>
+
+<script>
+    <% if flash[:notice].present? %>
+        alert("<%= flash[:notice] %>")
+    <% end %>
+
+    reservation_infos = document.querySelectorAll('.reservation_info');
+    <%  @reservations.each_with_index do |reservation, index| %>
+        <% if reservation.status == "キャンセル" %>
+             reservation_infos[<%= index %>].remove();
+        <% end %>
+    <% end %>
+</script>
