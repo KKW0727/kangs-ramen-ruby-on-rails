@@ -1,7 +1,7 @@
 class Reservation < ApplicationRecord
   belongs_to :user
 
-  enum status: [:未決済, :決済中, :完了, :失敗]
+  enum status: [:未決済, :決済中, :完了, :失敗, :キャンセル]
 
   scope :before_payment, ->{Reservation.where(status:0)}
   scope :processed, ->{Reservation.where(status:1)}
@@ -10,6 +10,8 @@ class Reservation < ApplicationRecord
 
   has_many :reservation_menus, dependent: :destroy
   has_many :menus, through: :reservation_menus
+
+  has_one :payment,  dependent: :nullify
 
   def menu_total_price 
     menu_total_price = 0
