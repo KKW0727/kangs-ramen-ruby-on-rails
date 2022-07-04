@@ -11,7 +11,7 @@ class Reservation < ApplicationRecord
   has_many :reservation_menus, dependent: :destroy
   has_many :menus, through: :reservation_menus
 
-  has_one :payment,  dependent: :nullify
+  has_one :payment, dependent: :destroy
 
   def menu_total_price 
     menu_total_price = 0
