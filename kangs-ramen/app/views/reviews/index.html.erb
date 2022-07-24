@@ -1,0 +1,53 @@
+<div class = "review_container">
+<h1>Kang'sラーメンのレビュー</h1>
+<section>
+<% @reviews.each do |review| %>
+     <%=link_to review_path(review), class: :review_info do %>
+    <% if review.image.attached? %>
+    <%= image_tag review.image[0], width:110 %>
+    <% end %>
+    <span><%= review.comment %></span>
+    <% end %>
+<% end %>
+</section>
+<%= link_to "作成する", new_review_path, class: "new_review_btn" %>
+<div>
+
+<style>
+    .review_container {
+        display:flex;
+        flex-direction: column;
+        text-align: center;
+        padding-top: 50px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+     .review_container a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .review_info {
+        height: 100px;
+        display:flex;
+        justify-content: start;
+        border: 1px solid #ccc;
+        box-shadow: 5px 5px 5px #ccc;
+        margin: 22px 0 12px 0;
+    }
+
+    .review_info span {
+        margin-left: 100px;
+    }
+
+    .review_info:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        transition: all 0.5s ease-in-out;
+    }
+
+    .new_review_btn {
+        align-self: end;
+    }
+</style>
