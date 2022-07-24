@@ -1,8 +1,14 @@
 <div class = "review_container">
 <h1>Kang'sラーメンのレビュー</h1>
-<section>
+<h3 class = "review_count"><%= @reviews.size %>件</h3>
+<section class = "review_options">
+<span>すべて</span>
+<span>MYレビュー</span>
+</section>
+<section class = "reviews">
 <% @reviews.each do |review| %>
-     <%=link_to review_path(review), class: :review_info do %>
+    <%=link_to review_path(review), class: :review_info do %>
+    <%= hidden_field_tag "review_user_id",review.user.id, class: :review_user_id %>
     <% if review.image.attached? %>
     <%= image_tag review.image[0], width:110 %>
     <% end %>
@@ -50,4 +56,56 @@
     .new_review_btn {
         align-self: end;
     }
+
+    .review_options span {
+        border: 1px solid #ffc0cb;
+        border-radius: 8px;
+        padding: 8px 12px;
+        background: #ffc0cb;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .show {
+        display: flex;
+    }
+
 </style>
+
+<script>
+    const review_options = document.querySelectorAll('.review_options span');
+    const reviews = document.querySelector('.reviews');
+    const review_info = document.querySelectorAll('.review_info');
+    const review_user_id = document.querySelectorAll('.review_user_id');
+    const review_count = document.querySelector('.review_count');
+
+    //すべてをクリック
+    review_options[0].addEventListener('click', () => {
+        //hideを持っているelのhideを除去して見えるようにする
+                review_info.forEach((review) => {
+            if(review.classList.contains('hide')){
+                 review.classList.remove('hide');
+            }
+            //全てのレビューの数を画面に表示
+           review_count.textContent = review_info.length + "件";
+        })
+    });
+    //MYレビューをクリック
+    review_options[1].addEventListener('click', () => {
+        count = 0;
+        reviews.classList.add('hide'); //review全体を一回隠す
+        review_info.forEach((review, review_index) => {
+            if(<%= current_user.id %> !=  review_user_id[review_index].value ){
+                count++; //MYレビューじゃないレビューの数
+                reviews.classList.remove('hide');
+                review.classList.add('hide');
+                //review_info.length(全てのレビュー) - count（MYレビューじゃないレビューの数）　= MYレビューの数
+                //MYレビューの数を画面に表示
+                review_count.textContent = (review_info.length-count) + "件";
+        }
+        });
+    });
+  
+</script>
