@@ -1,0 +1,79 @@
+<div class = "review_container" >
+<h1>Kang'sラーメンのレビュー</h1>
+<section class = "review_image" >
+<% if @review.image.attached? %>
+<% @review.image.each do |image| %>
+<%= image_tag image, size: 15*15 %>
+<% end %>
+<% else %>
+    <h1>イメージはありません。</h1>
+<% end %>
+</section>
+<section class = "review_comment">
+<% if @review.user.id == current_user.id %>
+<h3>MYレビュー</h3>
+<% else %>
+<h3><%=@review.user.email%>さんのレビュー</h3>
+<% end %>
+<%= @review.comment %>
+</section>
+<section class = "actions">
+<% if current_user.id == @review.user.id %>
+<%= link_to "変更", edit_review_path %>
+<%= link_to "削除", review_path, method: :delete, data: {confirm:"本当に削除しますか?"} %>
+<% end %>
+</section>
+</div>
+
+<style>
+    *{margin:0; padding:0;}
+
+    a {
+        text-decoration: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .review_container {
+        text-align: center;
+        padding-top: 50px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .review_image {
+        width: 700px;
+        margin:50px auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .review_comment {
+        border: 1px solid #000;  
+        border-radius: 8px;
+        padding: 6px 60px 60px 12px;
+    }
+
+    .review_comment {
+        text-align: left;
+    }
+
+    .review_comment h3 {
+        margin-bottom: 12px;
+    }
+
+    .actions {
+        margin: 50px 0;
+    }
+
+    .actions a {
+        padding: 6px 12px;
+        background: #ffc0cb;
+        border-radius: 8px;
+    }
+
+    .actions a:hover {
+        opacity: 0.8;
+    }
+
+</style>
