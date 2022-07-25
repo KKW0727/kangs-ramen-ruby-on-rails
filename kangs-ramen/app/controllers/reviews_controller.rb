@@ -40,6 +40,12 @@ class ReviewsController < ApplicationController
          redirect_to reviews_path
     end
 
+    def destroy
+        @review = Review.find(params[:id])
+        @review.destroy
+        redirect_to reviews_path
+    end
+
     private
     def permit_params
         params.require(:review).permit(:comment, image: []).merge(user_id: current_user.id)
