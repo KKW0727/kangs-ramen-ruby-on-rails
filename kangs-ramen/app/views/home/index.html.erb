@@ -28,6 +28,22 @@
     </section>
 </header>
 
+<%# review %>
+<section id="review">
+    <h1>レビュー</h1>
+    <% @reviews.each do |review| %>
+    <article class = "review_info">
+    <% if review.image.attached? %>
+    <%= image_tag review.image[0], size: 8*8 %>
+    <% else %>
+     <%= image_tag 'noimage.png', size: 8*8 %>
+    <% end %>
+    <p><%= review.comment %></p>
+    </article>
+    <% end %>
+    <%= link_to "もっと見る", reviews_path, class: :to_reviews_btn %>
+</section>
+
 <%# concept %>
 <section id="concept">
     <h1>コンセプト</h1>
@@ -158,6 +174,46 @@
 
     .main_menu li:hover, 
     .sub_menu li:hover {
+        text-decoration: underline;
+    }
+
+    /* review */
+    #review {
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin: 0 auto;
+    }
+
+    .review_info {
+        height: 64px;
+        padding: 6px;
+        font-size: 12px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        background: #fff;
+        margin-bottom: 6px;
+        border-radius: 8px;
+    }
+
+    .review_info img {
+        border-radius: 8px;
+    }
+
+    .review_info p {
+        margin-left: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .to_reviews_btn {
+        align-self: end;
+        padding: 4px 8px;
+    }
+
+    .to_reviews_btn:hover {
         text-decoration: underline;
     }
     
