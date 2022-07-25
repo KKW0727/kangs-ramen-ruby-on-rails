@@ -21,7 +21,7 @@
     <% if review.image.attached? %>
     <%= image_tag review.image[0], width:110 %>
     <% else %>
-    <p>イメージなし</p>
+    <%= image_tag 'noimage.png', width:110 %>
     <% end %>
     <span><%= review.comment %></span>
     <% end %>
@@ -60,7 +60,10 @@
     }
 
     .review_info span {
-        margin-left: 100px;
+        margin-left: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis; /* ...にする */
+        white-space: nowrap; /* ホワイトスペースを詰める */
     }
 
     .review_info:hover {
