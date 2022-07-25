@@ -26,6 +26,20 @@ class ReviewsController < ApplicationController
         @review = Review.find(params[:id])
     end
 
+    def update
+        @review = Review.find(params[:id])
+        
+        if params[:image_ids]
+            images = @review.image.where(id: params[:image_ids])
+            images.each do |image|
+                image.purge
+            end
+        end
+
+         @review.update(permit_params)
+         redirect_to reviews_path
+    end
+
     private
     def permit_params
         params.require(:review).permit(:comment, image: []).merge(user_id: current_user.id)
