@@ -10,15 +10,19 @@
 <% end %>
 </section>
 <section class = "review_comment">
+<% if current_user.blank? %>
+<h3><%=@review.user.email%>さんのレビュー</h3>
+<% else %>
 <% if @review.user.id == current_user.id %>
 <h3>MYレビュー</h3>
 <% else %>
 <h3><%=@review.user.email%>さんのレビュー</h3>
 <% end %>
+<% end %>
 <%= @review.comment %>
 </section>
 <section class = "actions">
-<% if current_user.id == @review.user.id %>
+<% if user_signed_in? && current_user.id == @review.user.id %>
 <%= link_to "変更", edit_review_path %>
 <%= link_to "削除", review_path, method: :delete, data: {confirm:"本当に削除しますか?"} %>
 <% end %>

@@ -3,12 +3,21 @@
 <h3 class = "review_count"><%= @reviews.size %>件</h3>
 <section class = "review_options">
 <span>すべて</span>
+<% if user_signed_in? %>
 <span>MYレビュー</span>
+<% end %>
 </section>
 <section class = "reviews">
 <% @reviews.each do |review| %>
     <%=link_to review_path(review), class: :review_info do %>
     <%= hidden_field_tag "review_user_id",review.user.id, class: :review_user_id %>
+    <%# ユーザーがログインしている時　　%>
+    <% if user_signed_in? %>
+    <%= hidden_field_tag "current_user",current_user.id, class: :current_user %>
+    <% else %>
+    <%# ユーザーがログインしていない時　　%>
+    <%= hidden_field_tag "current_user",current_user, class: :current_user %>
+    <% end %>
     <% if review.image.attached? %>
     <%= image_tag review.image[0], width:110 %>
     <% else %>
@@ -95,7 +104,7 @@
     const review_info = document.querySelectorAll('.review_info');
     const review_user_id = document.querySelectorAll('.review_user_id');
     const review_count = document.querySelector('.review_count');
-
+    const current_user = document.querySelector('.current_user');
     //すべてをクリック
     review_options[0].addEventListener('click', () => {
         //hideを持っているelのhideを除去して見えるようにする
@@ -112,14 +121,14 @@
         count = 0;
         reviews.classList.add('hide'); //review全体を一回隠す
         review_info.forEach((review, review_index) => {
-            if(<%= current_user.id %> !=  review_user_id[review_index].value ){
+            if(current_user.value !=  review_user_id[review_index].value ){
                 count++; //MYレビューじゃないレビューの数
                 reviews.classList.remove('hide');
                 review.classList.add('hide');
                 //review_info.length(全てのレビュー) - count（MYレビューじゃないレビューの数）　= MYレビューの数
                 //MYレビューの数を画面に表示
                 review_count.textContent = (review_info.length-count) + "件";
-        }
+            }
         });
     });
   
